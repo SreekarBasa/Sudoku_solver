@@ -68,8 +68,8 @@ bool solveSudoku(vector<vector<int>>& grid) {
     for (int row = 0; row < GRID_SIZE; ++row) {
         for (int col = 0; col < GRID_SIZE; ++col) {
             if (grid[row][col] == 0) {
-                for (int number = 1; number <= GRID_SIZE; ++number) {
-                    if (isValid(grid, row, col, number)) {
+                for (int number = 1; number <= GRID_SIZE; ++number){
+                    if (isValid(grid, row, col, number)){
                         grid[row][col] = number;
                         if (solveSudoku(grid)) {
                             return true;
@@ -96,10 +96,8 @@ vector<vector<int>> generateRandomGrid() {
     // Fill the grid with random numbers
     for (int row = 0; row < GRID_SIZE; row++) {
         for (int col = 0; col < GRID_SIZE; col++) {
-
             // Generate a random number between 1 and 9
             int num = dis(gen);
-
             // Check if the number is valid at the current position
             if (isValid(grid, row, col, num)) {
                 grid[row][col] = num;
@@ -131,10 +129,19 @@ void getUserInput(int& row, int& col, int& num) {
 
 int main() {
     cout<<"Welcome to Sudoku!"<<endl;
-    vector<vector<int>> grid = generateRandomGrid();  //Generating Grid
+    vector<vector<int>> grid = {{2,0,9,6,7,0,8,5,4},
+                                {4,8,6,9,5,2,7,3,1},
+                                {0,0,0,0,4,0,6,2,9},
+                                {0,0,2,4,3,9,5,8,6},
+                                {5,6,4,0,8,0,3,9,2},
+                                {0,9,0,2,6,5,1,4,7},
+                                {0,0,1,0,2,4,9,0,3},
+                                {9,4,0,3,1,0,2,0,5},
+                                {0,2,0,0,9,0,4,1,8}};  //Generating Grid
     vector<vector<int>> solvedgrid = grid;
     int i=0;
     while(!solveSudoku(solvedgrid)){
+        cout<<"Invalid Grid"<<endl;
         i++;
         solvedgrid = generateRandomGrid();
         grid = solvedgrid;
